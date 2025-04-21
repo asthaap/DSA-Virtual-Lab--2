@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6
+    container_name: mongodb
+    ports: ["27017:27017"]
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+      MONGO_INITDB_DATABASE: algo_platform
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 30s
+      retries: 3
+
+  landing:
+    build: ./landing
+    ports: ["8507:8507"]
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
+  problem-repo:
+    build: ./problem-repo
+    ports: ["8501:8501"]
+    environment:
+      - MONGODB_URI=mongodb://admin:admin123@mongodb:27017/algo_platform?authSource=admin
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
+  code-analyzer:
+    build: ./code-analyzer
+    ports: ["8502:8502"]
+    environment:
+      - MONGODB_URI=mongodb://admin:admin123@mongodb:27017/algo_platform?authSource=admin
+    depends_on:
+      - mongodb
+      - problem-repo
+
+  plagiarism-checker:
+    build: ./plagiarism-checker
+    ports: ["8503:8503"]
+    environment:
+      - MONGODB_URI=mongodb://admin:admin123@mongodb:27017/algo_platform?authSource=admin
+    depends_on:
+      - mongodb
+      - problem-repo
+
+  leaderboard:
+    build: ./leaderboard
+    ports: ["8504:8504"]
+    environment:
+      - MONGODB_URI=mongodb://admin:admin123@mongodb:27017/algo_platform?authSource=admin
+    depends_on:
+      - mongodb
+      - problem-repo
+
+volumes:
+  mongodb_data:
