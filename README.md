@@ -77,7 +77,7 @@ Built with **Docker, Streamlit, and MongoDB**, this platform provides a **seamle
 
 1. **Clone the repository**  
    ```bash
-   git clone [https://github.com/Rahul-pro1/DSA_Lab.git](https://github.com/asthaap/DSA-Virtual-Lab--2.git)
+   git clone https://github.com/asthaap/DSA-Virtual-Lab--2.git
    cd DSA-Virtual-Lab--2
    ```
 
