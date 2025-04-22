@@ -14,7 +14,7 @@
 8. [**Development & Tech Stack**](#-development--tech-stack)  
 9. [**Troubleshooting**](#-troubleshooting)  
 10. [**Contributing**](#-contributing)  
-11. [**License**](#-license)  
+ 
 
 ---
 
@@ -186,11 +186,11 @@ DSA-virtual-lab--2/
 │   ├── Dockerfile
 │   └── requirements.txt
 └── leaderboard/                # User rankings
-    ├── app.py                  # Score aggregation
-    ├── Dockerfile
-    └── requirements.txt
-----.env
-----.Readme.md
+|    ├── app.py                  # Score aggregation
+|    ├── Dockerfile
+|    └── requirements.txt
+|──.env
+└──.Readme.md
 ```
 
 ### **Extending the Project**  
