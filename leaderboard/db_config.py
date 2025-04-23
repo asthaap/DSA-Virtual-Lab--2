@@ -7,4 +7,7 @@ def get_db():
 
 db = get_db()
 submissions_collection = db["submissions"]
+problems_collection = db["problems"]
 users_collection = db["users"]
+
+__all__ = ['submissions_collection', 'problems_collection','users_collection']
